@@ -12,8 +12,6 @@
 #SBATCH --time=00:30:00
 
 module load slurm_setup
-module load cmake/3.21.4
-module load gcc/11.2.0
 
 cd $HOME
 
