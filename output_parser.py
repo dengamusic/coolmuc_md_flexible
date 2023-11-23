@@ -33,3 +33,4 @@ cores_dict = {}
 print("Traversals : {0}".format(list(traversal_dict)))
 print("Cores used : {0}".format(list(cores_dict.keys())))
 [print("{:<20} times in ns : {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
+[print("{}_times = {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
