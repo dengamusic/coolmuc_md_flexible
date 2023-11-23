@@ -6,7 +6,7 @@ import re
 #     sys.exit(1)
 
 # Get the filename from the command-line argument
-file_name = sys.argv[1]
+file_name = "c08_vs_c01.txt" #sys.argv[1]
 
 # Read the content of the file
 try:
@@ -17,14 +17,19 @@ except FileNotFoundError:
     sys.exit(1)
 
 # Define the regular expression pattern
-pattern = re.compile(r'Using (\d+) Threads[\s\S]*?Total wall-clock time\s+: (\d+)', re.MULTILINE)
-
-# Find all matches
+pattern = re.compile(
+    r'traversal-3b\s+:  \[(.*)][\s\S]*?Using (\d+) Threads[\s\S]*?Total wall-clock time\s+: (\d+) ns',
+    re.MULTILINE
+)# Find all matches
 matches = pattern.findall(input_text)
+#print(matches)
 
-grouped_dict = {}
-[grouped_dict.setdefault(threads, []).append(time) for threads, time in matches]
-zipped_result = list(zip(*list(grouped_dict.values())))
-print("Cores used : {0}".format(list(grouped_dict.keys())))
-# print(list(grouped_dict.values()))
-print(zipped_result)
+traversal_dict = {}
+cores_dict = {}
+[traversal_dict.setdefault(traversal, []).append(int(time)) for traversal, _, time in matches]
+[cores_dict.setdefault(int(threads), []).append(None) for _, threads, _ in matches]
+
+# print
+print("Traversals : {0}".format(list(traversal_dict)))
+print("Cores used : {0}".format(list(cores_dict.keys())))
+[print("{:<20} times in ns : {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
