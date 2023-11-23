@@ -6,7 +6,7 @@ import re
 #     sys.exit(1)
 
 # Get the filename from the command-line argument
-file_name = "c08_vs_c01.txt" #sys.argv[1]
+file_name = sys.argv[1]
 
 # Read the content of the file
 try:
