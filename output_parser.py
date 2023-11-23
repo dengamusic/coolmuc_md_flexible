@@ -1,12 +1,12 @@
 import sys
 import re
 
-if len(sys.argv) != 2:
-    print("Usage: python output_parser.py <filename>")
-    sys.exit(1)
+# if len(sys.argv) != 2:
+#     print("Usage: python output_parser.py <filename>")
+#     sys.exit(1)
 
 # Get the filename from the command-line argument
-file_name = sys.argv[1]
+file_name = "c08_vs_c01.txt" #sys.argv[1]
 
 # Read the content of the file
 try:
@@ -24,8 +24,7 @@ matches = pattern.findall(input_text)
 
 grouped_dict = {}
 [grouped_dict.setdefault(threads, []).append(time) for threads, time in matches]
-zipped_result = [list(zip(*group)) for group in grouped_dict.values()]
-# Display the results
-#for i, (threads_used, wall_time_ns) in enumerate(matches, start=1):
- #   print(f"Block {i}: Threads Used = {threads_used}, Time = {wall_time_ns} ns")
+zipped_result = list(zip(*list(grouped_dict.values())))
+print("Cores used : {0}".format(list(grouped_dict.keys())))
+# print(list(grouped_dict.values()))
 print(zipped_result)
