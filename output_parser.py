@@ -22,6 +22,10 @@ pattern = re.compile(r'Using (\d+) Threads[\s\S]*?Total wall-clock time\s+: (\d+
 # Find all matches
 matches = pattern.findall(input_text)
 
+grouped_dict = {}
+[grouped_dict.setdefault(threads, []).append(time) for threads, time in matches]
+zipped_result = [list(zip(*group)) for group in grouped_dict.values()]
 # Display the results
-for i, (threads_used, wall_time_ns) in enumerate(matches, start=1):
-    print(f"Block {i}: Threads Used = {threads_used}, Time = {wall_time_ns} ns")
+#for i, (threads_used, wall_time_ns) in enumerate(matches, start=1):
+ #   print(f"Block {i}: Threads Used = {threads_used}, Time = {wall_time_ns} ns")
+print(zipped_result)
