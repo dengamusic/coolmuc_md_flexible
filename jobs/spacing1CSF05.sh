@@ -9,7 +9,7 @@
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=03:00:00
+#SBATCH --time=02:00:00
 
 module load slurm_setup
 
