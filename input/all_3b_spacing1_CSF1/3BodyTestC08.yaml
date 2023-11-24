@@ -4,13 +4,6 @@ functor-3b                           :  axilrod-teller
 traversal-3b                         :  [lc_c08_3b] # ds_sequential_3b
 newton3-3b                           :  [enabled]
 data-layout-3b                       :  [AoS]
-
-# Uncomment to combine pairwise and 3-body interaction
-#functor                              :  lj-avx
-#traversal                            :  [lc_c01, lc_c08, lc_sliced]
-#newton3                              :  [enabled, disabled]
-#data-layout                          :  [AoS, SoA]
-
 verlet-rebuild-frequency             :  10
 verlet-skin-radius-per-timestep      :  0.02
 selector-strategy                    :  Fastest-Absolute-Value
@@ -37,7 +30,7 @@ Objects:
     0:
       box-length                     :  [10, 10, 10]
       bottomLeftCorner               :  [0, 0, 0]
-      particle-spacing               :  1.05
+      particle-spacing               :  1
       velocity                       :  [0, 0, 0]
       particle-type-id               :  0
 thermostat:
