@@ -103,6 +103,11 @@ def create_bash_scripts(directory, duration):
         create_bash_script(directory, f"{traversal}.yaml", duration)
 
 
+def submit_sbatch(directory):
+    for traversal in traversals:
+        os.system(f"sbatch {directory}/{traversal}.sh")
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: python script.py <spacing> <box_size> <cell_size> <duration>")
@@ -119,3 +124,5 @@ if __name__ == "__main__":
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_scripts(directory, duration)
     print("Created bash scripts.")
+    submit_sbatch(directory)
+    print("Submitted sbatch.")
