@@ -104,7 +104,7 @@ def create_bash_scripts(directory, duration):
 
 
 def submit_sbatch(directory):
-    os.system(f"cd {directory}")
+    os.chdir(directory)
     for traversal in traversals:
         os.system(f"sbatch {traversal}.sh")
 
