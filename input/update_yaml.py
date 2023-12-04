@@ -1,11 +1,12 @@
 import sys
+import os
 import yaml
 
-
-def update_yamls(input_yamls, spacing, box_size, cell_size):
-    for yaml_file in input_yamls:
-        update_yaml_file(yaml_file, spacing, box_size, cell_size)
-
+def update_yamls_in_directory(directory, spacing, box_size, cell_size):
+    for filename in os.listdir(directory):
+        if filename.endswith(".yaml"):
+            yaml_file = os.path.join(directory, filename)
+            update_yaml_file(yaml_file, spacing, box_size, cell_size)
 
 def update_yaml_file(yaml_file, spacing, box_size, cell_size):
     with open(yaml_file, 'r') as file:
@@ -21,15 +22,14 @@ def update_yaml_file(yaml_file, spacing, box_size, cell_size):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python script.py <spacing> <box_size> <cell_size>")
+    if len(sys.argv) != 5:
+        print("Usage: python script.py <directory> <spacing> <box_size> <cell_size>")
         sys.exit(1)
 
-    spacing = float(sys.argv[1])
-    box_size = float(sys.argv[2])
-    cell_size = int(sys.argv[3])
+    directory = sys.argv[1]
+    spacing = float(sys.argv[2])
+    box_size = float(sys.argv[3])
+    cell_size = int(sys.argv[4])
 
-    input_yamls = ["3BodyTestC01.yaml", "3BodyTestC04.yaml", "3BodyTestC08.yaml", "3BodyTestC02Sliced.yaml", "3BodyTestSliced.yaml"]
-
-    update_yaml_file(input_yamls, spacing, [box_size, box_size, box_size], cell_size)
-    print(f"Updated YAML files with spacing={spacing}, box_size={box_size}, cell_size={cell_size}")
+    update_yamls_in_directory(directory, spacing, [box_size, box_size, box_size], cell_size)
+    print(f"Updated YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={cell_size}")
