@@ -117,6 +117,8 @@ if __name__ == "__main__":
     spacing = float(sys.argv[1])
     box_size = int(sys.argv[2])
     csf = float(sys.argv[3])
+    if csf < 1:
+        traversals.remove("lc_c04_3b")
     duration = int(sys.argv[4])
     directory = f"spacing{spacing}_box{box_size}_CSF{csf}"
 
