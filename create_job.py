@@ -105,16 +105,17 @@ def create_bash_scripts(directory, duration):
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Usage: python script.py <spacing> <box_size> <cell_size>")
+        print("Usage: python script.py <spacing> <box_size> <cell_size> <duration>")
         sys.exit(1)
 
     spacing = float(sys.argv[1])
     box_size = int(sys.argv[2])
     csf = float(sys.argv[3])
+    duration = int(sys.argv[4])
     directory = f"spacing{spacing}_box{box_size}_CSF{csf}"
 
     create_directory(directory)
     create_yamls_in_directory(directory, spacing, [box_size, box_size, box_size], csf)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
-    create_bash_scripts(directory,45)
+    create_bash_scripts(directory, duration)
     print("Created bash scripts.")
