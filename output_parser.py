@@ -2,7 +2,7 @@ import os
 import sys
 import re
 
-def parse_file(file_name):
+def parse_file(file_name, result):
     try:
         with open(file_name, 'r') as file:
             input_text = file.read()
@@ -39,6 +39,6 @@ result = ""
 directory = sys.argv[1]
 for file in os.listdir(directory):
     if file.endswith(".out"):
-        parse_file(f"{directory}/{file}")
+        parse_file(f"{directory}/{file}", result)
 
 print(result)
