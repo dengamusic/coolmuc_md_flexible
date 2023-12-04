@@ -109,7 +109,7 @@ def submit_sbatch(directory):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 5:
         print("Usage: python script.py <spacing> <box_size> <cell_size> <duration>")
         sys.exit(1)
 
