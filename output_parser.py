@@ -24,11 +24,11 @@ def parse_file(file_name, result):
     [cores_dict.setdefault(int(threads), []).append(None) for _, threads, _ in matches]
 
     # print
-    print("Traversals : {0}".format(list(traversal_dict)))
-    print("Cores used : {0}".format(list(cores_dict.keys())))
-    [print("{:<20} times in ns : {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
+   # print("Traversals : {0}".format(list(traversal_dict)))
+    #print("Cores used : {0}".format(list(cores_dict.keys())))
+    #[print("{:<20} times in ns : {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
     [print("{}_times = {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
-    [result + "{}_times = {}".format(traversal, traversal_dict.get(traversal)) for traversal in traversal_dict.keys()]
+    #[result + "{}_times = {}".format(traversal, traversal_dict.get(traversal)) for traversal in traversal_dict.keys()]
 
 
 if len(sys.argv) != 2:
