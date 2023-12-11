@@ -119,7 +119,7 @@ if __name__ == "__main__":
     csf = float(sys.argv[3])
     if csf < 1:
         traversals.remove("lc_c04_3b")
-    duration = int(sys.argv[4])
+    duration = sys.argv[4]
     directory = f"spacing{spacing}_box{box_size}_CSF{csf}"
 
     create_directory(directory)
