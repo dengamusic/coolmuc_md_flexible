@@ -37,7 +37,7 @@ tuning-samples                       :  3
 tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
-deltaT                               :  0.002
+deltaT                               :  0
 iterations                           :  100
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
@@ -80,7 +80,7 @@ def create_bash_script(directory, yaml_file, duration):
 #SBATCH --cpus-per-task=56
 # 56 is the maximum reasonable value for CooLMUC-2
 #SBATCH --mail-type=end
-#SBATCH --mail-user=nanxingnick.deng@tum.de
+#SBATCH --mail-user=NONE
 #SBATCH --export=NONE
 #SBATCH --time=00:{duration}:00
 
