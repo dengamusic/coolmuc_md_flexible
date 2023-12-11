@@ -82,7 +82,7 @@ def create_bash_script(directory, yaml_file, duration):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=NONE
 #SBATCH --export=NONE
-#SBATCH --time=00:{duration}:00
+#SBATCH --time={duration}
 
 module load slurm_setup
 
