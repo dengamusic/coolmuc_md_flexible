@@ -15,12 +15,9 @@ def create_directory(directory_name):
 
 
 def create_yamls_in_directory(directory, spacing, box_size, cell_size):
-    yamls = []
     for traversal in traversals:
         yaml_file = os.path.join(directory, f"{traversal}.yaml")
         create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size)
-        yamls.append(yaml_file)
-    return yamls
 
 
 def create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size):
@@ -72,11 +69,7 @@ vtk-write-frequency                  :  10
         file.write(file_string)
 
 
-def create_bash_script(directory, duration, yamls):
-    job_string = ""
-    for yaml_file in yamls:
-        job_string += f"AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/{yaml_file}\n"
-
+def create_bash_script(directory, yaml_file, duration):
     script_content = f'''\
 #!/bin/bash
 #SBATCH -J 3btest
@@ -87,7 +80,7 @@ def create_bash_script(directory, duration, yamls):
 #SBATCH --cpus-per-task=56
 # 56 is the maximum reasonable value for CooLMUC-2
 #SBATCH --mail-type=end
-#SBATCH --mail-user=nanxingnick.deng@tum.de
+#SBATCH --mail-user=NONE
 #SBATCH --export=NONE
 #SBATCH --time={duration}
 
@@ -97,16 +90,23 @@ cd $HOME
 
 for num_threads in 1 2 4 8 16 32 56; do
     export OMP_NUM_THREADS=$num_threads
-    {job_string}
+    AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/{yaml_file}
 done
 '''
 
-    with open(f"{directory}/{directory}.sh", 'w') as file:
+    with open(f"{directory}/{yaml_file[:-5]}.sh", 'w') as file:
         file.write(script_content)
 
 
+def create_bash_scripts(directory, duration):
+    for traversal in traversals:
+        create_bash_script(directory, f"{traversal}.yaml", duration)
+
+
 def submit_sbatch(directory):
-    os.system(f"sbatch {directory}.sh")
+    os.chdir(directory)
+    for traversal in traversals:
+        os.system(f"sbatch {traversal}.sh")
 
 
 if __name__ == "__main__":
@@ -123,9 +123,9 @@ if __name__ == "__main__":
     directory = f"spacing{spacing}_box{box_size}_CSF{csf}"
 
     create_directory(directory)
-    yamls = create_yamls_in_directory(directory, spacing, [box_size, box_size, box_size], csf)
+    create_yamls_in_directory(directory, spacing, [box_size, box_size, box_size], csf)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
-    create_bash_script(directory, duration, yamls)
+    create_bash_scripts(directory, duration)
     print("Created bash scripts.")
     submit_sbatch(directory)
     print("Submitted sbatch.")
