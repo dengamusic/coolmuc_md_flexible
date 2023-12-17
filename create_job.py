@@ -106,6 +106,7 @@ done
 
 
 def submit_sbatch(directory):
+    os.chdir(directory)
     os.system(f"sbatch {directory}.sh")
 
 
