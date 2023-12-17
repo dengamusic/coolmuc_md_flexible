@@ -129,4 +129,3 @@ if __name__ == "__main__":
     create_bash_script(directory, duration, yamls)
     print("Created bash scripts.")
     submit_sbatch(directory)
-    print("Submitted sbatch.")
