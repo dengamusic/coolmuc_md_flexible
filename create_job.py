@@ -75,7 +75,7 @@ vtk-write-frequency                  :  10
 def create_bash_script(directory, duration, yamls):
     job_string = ""
     for yaml_file in yamls:
-        job_string += f"AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/{yaml_file}\n"
+        job_string += f"AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{yaml_file}\n"
 
     script_content = f'''\
 #!/bin/bash
