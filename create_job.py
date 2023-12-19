@@ -75,7 +75,7 @@ vtk-write-frequency                  :  10
 def create_bash_script(directory, duration, yamls):
     job_string = ""
     for yaml_file in yamls:
-        job_string += f"AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{yaml_file}\n"
+        job_string += f"\t\tAutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{yaml_file}\n"
 
     script_content = f'''\
 #!/bin/bash
@@ -97,7 +97,7 @@ cd $HOME
 
 for num_threads in 1 2 4 8 16 32 56; do
     export OMP_NUM_THREADS=$num_threads
-    {job_string}
+{job_string}
 done
 '''
 
