@@ -80,7 +80,7 @@ def create_bash_script(directory, yaml_file, duration):
 #SBATCH --cpus-per-task=56
 # 56 is the maximum reasonable value for CooLMUC-2
 #SBATCH --mail-type=end
-#SBATCH --mail-user=NONE
+#SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
 #SBATCH --time={duration}
 
