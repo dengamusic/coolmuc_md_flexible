@@ -113,11 +113,11 @@ def submit_sbatch(directory):
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python script.py <spacing> <box_size> <cell_size> <duration>")
+        print("Usage: python script.py <spacing> [<box_size>] <cell_size> <duration>")
         sys.exit(1)
 
     spacing = float(sys.argv[1])
-    box_size = int(sys.argv[2])
+    box_size = [int(i) for i in sys.argv[2].split(",")]
     csf = float(sys.argv[3])
     if csf < 1:
         traversals.remove("lc_c04_3b")
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     directory = f"spacing{spacing}_box{box_size}_CSF{csf}"
 
     create_directory(directory)
-    yamls = create_yamls_in_directory(directory, spacing, [box_size, box_size, box_size], csf)
+    yamls = create_yamls_in_directory(directory, spacing, box_size, csf)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_script(directory, duration, yamls)
     print("Created bash scripts.")
