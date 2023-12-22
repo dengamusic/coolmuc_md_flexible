@@ -86,7 +86,7 @@ def create_bash_script(directory, yaml_file, duration):
 
 module load slurm_setup
 
-cd /dss/dsshome1/05/ge93quw2/Autopas
+cd /dss/dsshome1/05/ge93quw2/
 
 for num_threads in 1 2 4 8 16 32 56; do
     export OMP_NUM_THREADS=$num_threads
