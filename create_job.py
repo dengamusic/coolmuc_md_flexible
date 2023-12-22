@@ -122,7 +122,7 @@ if __name__ == "__main__":
     if csf < 1:
         traversals.remove("lc_c04_3b")
     duration = sys.argv[4]
-    directory = f"spacing{spacing}_box{box_size}_CSF{csf}"
+    directory = f"spacing{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
 
     create_directory(directory)
     yamls = create_yamls_in_directory(directory, spacing, box_size, csf)
