@@ -88,7 +88,7 @@ module load slurm_setup
 
 cd /dss/dsshome1/05/ge93quw2/
 
-for num_threads in 1 2 4 8 16 32 56; do
+for num_threads in 1 2 4 8 12 16 20 24 28 32 36 40 44 48 52 56; do
     export OMP_NUM_THREADS=$num_threads
     AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/{yaml_file}
 done
