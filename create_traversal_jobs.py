@@ -14,13 +14,13 @@ def create_directory(directory_name):
         print(f"Directory '{directory_path}' already exists.")
 
 
-def create_yamls_in_directory(directory, spacing, box_size, cell_size):
+def create_yamls_in_directory(directory, spacing, box_size, cell_size, iterations):
     for traversal in traversals:
         yaml_file = os.path.join(directory, f"{traversal}.yaml")
-        create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size)
+        create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, iterations)
 
 
-def create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size):
+def create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, iterations):
     newton3 = "dis" if "c01" in traversal else "en"
     file_string = f'''\
 container                            :  [LinkedCells] 
@@ -38,7 +38,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  100
+iterations                           :  {iterations}
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
@@ -111,20 +111,21 @@ def submit_sbatch(directory):
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python script.py <spacing> [<box_size>] <cell_size> <duration>")
+        print("Usage: python script.py <spacing> [<box_size>] <cell_size> <iterations> <duration>")
         sys.exit(1)
 
     spacing = float(sys.argv[1])
     box_size = [int(i) for i in sys.argv[2].split(",")]
     csf = float(sys.argv[3])
+    iterations = int(sys.argv[4])
     if csf < 1:
         traversals.remove("lc_c04_3b")
-    duration = sys.argv[4]
+    duration = sys.argv[5]
     directory = f"spacing{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
 
     create_directory(directory)
-    create_yamls_in_directory(directory, spacing, box_size, csf)
-    print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
+    create_yamls_in_directory(directory, spacing, box_size, csf, iterations)
+    print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}, iterations={iterations}.")
     create_bash_scripts(directory, duration)
     print("Created bash scripts.")
     submit_sbatch(directory)
