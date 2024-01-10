@@ -59,10 +59,7 @@ Objects:
 log-level                            :  warn
 no-flops                             :  false
 no-end-config                        :  true
-no-progress-bar                      :  false
-vtk-filename                         :  3BodyTest
-vtk-output-folder                    :  3BodyTestOutput
-vtk-write-frequency                  :  10
+no-progress-bar                      :  true
 '''
 
     with open(yaml_file, 'w') as file:
@@ -98,9 +95,12 @@ done
         file.write(script_content)
 
 
-def create_bash_scripts(directory, duration):
+def create_bash_scripts(directory, duration, duration_c01):
     for traversal in traversals:
-        create_bash_script(directory, f"{traversal}.yaml", duration)
+        if "c01" in traversal:
+            create_bash_script(directory, f"{traversal}.yaml", duration_c01)
+        else:
+            create_bash_script(directory, f"{traversal}.yaml", duration)
 
 
 def submit_sbatch(directory):
@@ -110,8 +110,8 @@ def submit_sbatch(directory):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 6:
-        print("Usage: python script.py <spacing> [<box_size>] <cell_size> <iterations> <duration>")
+    if len(sys.argv) != 7:
+        print("Usage: python script.py <spacing> [<box_size>] <cell_size> <iterations> <duration> <duration_C01>")
         sys.exit(1)
 
     spacing = float(sys.argv[1])
@@ -121,11 +121,12 @@ if __name__ == "__main__":
         traversals.remove("lc_c04_3b")
     iterations = int(sys.argv[4])
     duration = sys.argv[5]
+    duration_c01 = sys.argv[6]
     directory = f"spacing{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
 
     create_directory(directory)
     create_yamls_in_directory(directory, spacing, box_size, csf, iterations)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}, iterations={iterations}.")
-    create_bash_scripts(directory, duration)
+    create_bash_scripts(directory, duration, duration_c01)
     print("Created bash scripts.")
     submit_sbatch(directory)
