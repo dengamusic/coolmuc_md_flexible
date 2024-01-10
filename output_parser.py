@@ -44,9 +44,17 @@ for file in os.listdir(directory):
     if file.endswith(".out"):
         parse_file(f"{directory}/{file}", lexika)
 
-
+print("Total Wall Clock Times:")
 [print("{}_times = {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
-[print("{}_times_per_iteration = {}".format(traversal, times_per_iteration_dict.get(traversal))) for traversal in traversal_dict.keys()]
+
+print("\nTimes per Iteration:")
+[print("{}_times = {}".format(traversal, times_per_iteration_dict.get(traversal))) for traversal in traversal_dict.keys()]
+
+print("\nGFLOPs:")
 [print("{}_gflops = {}".format(traversal, gflops_dict.get(traversal))) for traversal in traversal_dict.keys()]
+
+print("\n:GFLOPs/sec")
 [print("{}_gflops_sec = {}".format(traversal, gflops_sec_dict.get(traversal))) for traversal in traversal_dict.keys()]
+
+print("\nHit Rates:")
 [print("{}_hit_rate = {}".format(traversal, hit_rate_dict.get(traversal))) for traversal in traversal_dict.keys()]
