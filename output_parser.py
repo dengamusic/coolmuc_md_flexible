@@ -3,7 +3,7 @@ import sys
 import re
 
 
-def parse_file(file_name, result, lexika):
+def parse_file(file_name, lexika):
     try:
         with open(file_name, 'r') as file:
             input_text = file.read()
