@@ -26,8 +26,8 @@ def parse_file(file_name, result):
     [gflops_dict.setdefault(traversal, []).append(float(gflops)) for traversal, _, _, gflops, _, _ in matches]
     [gflops_sec_dict.setdefault(traversal, []).append(float(gflops_sec)) for traversal, _, _, _, gflops_sec, _ in matches]
     [hit_rate_dict.setdefault(traversal, []).append(float(hit_rate)) for traversal, _, _, _, _, hit_rate in matches]
-    [traversal_dict.setdefault(traversal, []).append(int(time)) for traversal, _, time in matches]
-    [cores_dict.setdefault(int(threads), []).append(None) for _, threads, _ in matches]
+    [traversal_dict.setdefault(traversal, []).append(int(time)) for traversal, _, time, _, _, _ in matches]
+    [cores_dict.setdefault(int(threads), []).append(None) for _, threads, _, _, _, _ in matches]
 
     # print
    # print("Traversals : {0}".format(list(traversal_dict)))
