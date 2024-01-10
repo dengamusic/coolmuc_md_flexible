@@ -38,6 +38,7 @@ cores_dict = {}
 gflops_dict = {}
 gflops_sec_dict = {}
 hit_rate_dict = {}
+lexika = [traversal_dict, cores_dict, gflops_dict, gflops_sec_dict, hit_rate_dict]
 for file in os.listdir(directory):
     if file.endswith(".out"):
         parse_file(f"{directory}/{file}", lexika)
