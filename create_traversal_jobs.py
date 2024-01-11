@@ -69,7 +69,7 @@ no-progress-bar                      :  true
 def create_bash_script(directory, yaml_file, duration):
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J 3btest
+#SBATCH -J {yaml_file[:-5] + directory}
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
