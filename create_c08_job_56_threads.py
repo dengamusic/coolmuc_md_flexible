@@ -118,9 +118,7 @@ def submit_sbatch(directory):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 7:
-        print("Usage: python script.py <spacing> [<box_size>] <cell_size> <iterations> <duration> <duration_C01>")
-        sys.exit(1)
+
 
     # spacing = float(sys.argv[1])
     # box_size = [int(i) for i in sys.argv[2].split(",")]
