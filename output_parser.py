@@ -38,7 +38,7 @@ def parse_directory(directory):
     gflops_sec_dict = {}
     hit_rate_dict = {}
     lexika = [traversal_dict, cores_dict, gflops_dict, gflops_sec_dict, hit_rate_dict, times_per_iteration_dict]
-    for file in os.listdir(directory):
+    for file in sorted(os.listdir(directory)):
         if file.endswith(".out"):
             parse_file(f"{directory}/{file}", lexika)
 
