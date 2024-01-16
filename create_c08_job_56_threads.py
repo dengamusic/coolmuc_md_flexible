@@ -106,9 +106,9 @@ export OMP_NUM_THREADS=56
 def create_bash_scripts(directory, yamls):
     for traversal in traversals:
         if "c01" in traversal:
-            create_bash_script(directory, f"{traversal}.yaml", yamls)
+            create_bash_script(directory, yamls)
         else:
-            create_bash_script(directory, f"{traversal}.yaml", yamls)
+            create_bash_script(directory,  yamls)
 
 
 def submit_sbatch(directory):
