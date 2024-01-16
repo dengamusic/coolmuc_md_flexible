@@ -60,13 +60,16 @@ def parse_directory(directory):
     [print("{}_hit_rate = {}".format(traversal, hit_rate_dict.get(traversal))) for traversal in traversal_dict.keys()]
 
 
-
-for dir_name in glob.glob('spacing*/'):
-    print(dir_name)
-    parse_directory(dir_name)
-    print("\n\n")
-        # You can add your code here to open and process each file
-        # For example, to read the file:
-        # with open(file_name, 'r') as file:
-        #     contents = file.read()
-        #     print(contents)
+# if 1 argument is given, parse that file
+if len(sys.argv) == 2:
+    parse_directory(sys.argv[1])
+else:
+    for dir_name in glob.glob('spacing*/'):
+        print(dir_name)
+        parse_directory(dir_name)
+        print("\n\n")
+            # You can add your code here to open and process each file
+            # For example, to read the file:
+            # with open(file_name, 'r') as file:
+            #     contents = file.read()
+            #     print(contents)
