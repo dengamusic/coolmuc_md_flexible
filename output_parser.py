@@ -62,8 +62,9 @@ def parse_directory(directory):
 
 
 for dir_name in glob.glob('spacing*/'):
-    for file_name in glob.glob(os.path.join(dir_name, 'slurm*')):
-        print(f"Found file: {file_name}")
+    print(dir_name)
+    parse_directory(dir_name)
+    print("\n\n")
         # You can add your code here to open and process each file
         # For example, to read the file:
         # with open(file_name, 'r') as file:
