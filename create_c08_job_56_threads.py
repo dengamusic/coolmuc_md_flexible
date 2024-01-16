@@ -134,7 +134,7 @@ if __name__ == "__main__":
     box_size = [10, 10, 250]
 
     create_directory(directory)
-    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, iterations)
+    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 10)
     print(f"Created YAML files")
     create_bash_scripts(directory, yamls)
     print("Created bash scripts.")
