@@ -1,3 +1,4 @@
+import glob
 import os
 import sys
 import re
@@ -28,33 +29,43 @@ def parse_file(file_name, lexika):
     [times_per_iteration_dict.setdefault(traversal, []).append(int(time_per_iteration)) for traversal, _, time_per_iteration, _, _, _, _ in matches]
 
 
-if len(sys.argv) != 2:
-    print("Usage: python output_parser.py <directory>")
-    sys.exit(1)
 
-directory = sys.argv[1]
-traversal_dict = {}
-times_per_iteration_dict = {}
-cores_dict = {}
-gflops_dict = {}
-gflops_sec_dict = {}
-hit_rate_dict = {}
-lexika = [traversal_dict, cores_dict, gflops_dict, gflops_sec_dict, hit_rate_dict, times_per_iteration_dict]
-for file in os.listdir(directory):
-    if file.endswith(".out"):
-        parse_file(f"{directory}/{file}", lexika)
+def parse_directory(directory):
+    traversal_dict = {}
+    times_per_iteration_dict = {}
+    cores_dict = {}
+    gflops_dict = {}
+    gflops_sec_dict = {}
+    hit_rate_dict = {}
+    lexika = [traversal_dict, cores_dict, gflops_dict, gflops_sec_dict, hit_rate_dict, times_per_iteration_dict]
+    for file in os.listdir(directory):
+        if file.endswith(".out"):
+            parse_file(f"{directory}/{file}", lexika)
 
-print("Total Wall Clock Times:")
-[print("{}_times = {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
+    print("Total Wall Clock Times:")
+    [print("{}_times = {}".format(traversal, traversal_dict.get(traversal))) for traversal in traversal_dict.keys()]
 
-print("\nTimes per Iteration:")
-[print("{}_times = {}".format(traversal, times_per_iteration_dict.get(traversal))) for traversal in traversal_dict.keys()]
+    print("\nTimes per Iteration:")
+    [print("{}_times = {}".format(traversal, times_per_iteration_dict.get(traversal))) for traversal in
+     traversal_dict.keys()]
 
-print("\nGFLOPs:")
-[print("{}_gflops = {}".format(traversal, gflops_dict.get(traversal))) for traversal in traversal_dict.keys()]
+    print("\nGFLOPs:")
+    [print("{}_gflops = {}".format(traversal, gflops_dict.get(traversal))) for traversal in traversal_dict.keys()]
 
-print("\n:GFLOPs/sec")
-[print("{}_gflops_sec = {}".format(traversal, gflops_sec_dict.get(traversal))) for traversal in traversal_dict.keys()]
+    print("\n:GFLOPs/sec")
+    [print("{}_gflops_sec = {}".format(traversal, gflops_sec_dict.get(traversal))) for traversal in
+     traversal_dict.keys()]
 
-print("\nHit Rates:")
-[print("{}_hit_rate = {}".format(traversal, hit_rate_dict.get(traversal))) for traversal in traversal_dict.keys()]
+    print("\nHit Rates:")
+    [print("{}_hit_rate = {}".format(traversal, hit_rate_dict.get(traversal))) for traversal in traversal_dict.keys()]
+
+
+
+for dir_name in glob.glob('spacing*/'):
+    for file_name in glob.glob(os.path.join(dir_name, 'slurm*')):
+        print(f"Found file: {file_name}")
+        # You can add your code here to open and process each file
+        # For example, to read the file:
+        # with open(file_name, 'r') as file:
+        #     contents = file.read()
+        #     print(contents)
