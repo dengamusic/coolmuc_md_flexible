@@ -72,7 +72,7 @@ no-progress-bar                      :  true
         file.write(file_string)
 
 
-def create_bash_script(directory, yamls, duration="01:00:00"):
+def create_bash_script(directory, yamls):
     yamls_string = ""
     for yaml in  yamls:
         yamls_string += f"AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{yaml}\n"
@@ -89,7 +89,7 @@ def create_bash_script(directory, yamls, duration="01:00:00"):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time={duration}
+#SBATCH --time=01:00:00
 
 module load slurm_setup
 
@@ -106,7 +106,7 @@ export OMP_NUM_THREADS=56
 def create_bash_scripts(directory, yamls):
     for traversal in traversals:
         if "c01" in traversal:
-            create_bash_script(directory, f"{traversal}.yaml", duration_c01)
+            create_bash_script(directory, f"{traversal}.yaml", yamls)
         else:
             create_bash_script(directory, f"{traversal}.yaml", yamls)
 
