@@ -99,7 +99,7 @@ export OMP_NUM_THREADS=56
 {yamls_string}
 '''
 
-    with open(f"{directory}/{yaml_file[:-5]}.sh", 'w') as file:
+    with open(f"{directory}/c08.sh", 'w') as file:
         file.write(script_content)
 
 
