@@ -131,6 +131,7 @@ if __name__ == "__main__":
     directory = "spacing_overlap_1010250"
     spacings = [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]
     csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.1667]
+    box_size = [10, 10, 250]
 
     create_directory(directory)
     yamls = create_yamls_in_directory(directory, spacings, csf, box_size, iterations)
