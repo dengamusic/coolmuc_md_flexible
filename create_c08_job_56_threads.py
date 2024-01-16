@@ -114,7 +114,7 @@ def create_bash_scripts(directory, yamls):
 def submit_sbatch(directory):
     os.chdir(directory)
     for traversal in traversals:
-        os.system(f"sbatch {traversal}.sh")
+        os.system(f"sbatch c08.sh")
 
 
 if __name__ == "__main__":
@@ -138,4 +138,4 @@ if __name__ == "__main__":
     print(f"Created YAML files")
     create_bash_scripts(directory, yamls)
     print("Created bash scripts.")
-    #submit_sbatch(directory)
+    submit_sbatch(directory)
