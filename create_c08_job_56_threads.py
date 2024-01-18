@@ -128,10 +128,10 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "spacing_overlap_1010250"
+    directory = "spacing_overlap_2020250"
     spacings = [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]
     csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.1667]
-    box_size = [10, 10, 250]
+    box_size = [20, 20, 250]
 
     create_directory(directory)
     yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 10)
