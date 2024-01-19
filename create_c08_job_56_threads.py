@@ -131,7 +131,7 @@ if __name__ == "__main__":
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
     directory = "spacing_overlap_1010250_morespacing"
-    spacings = np.arange(0.6, 1.3, 0.05)
+    spacings = [0.6 + i * 0.05 for i in range(1, 15)]
     csf = [1.3, 1.2, 1.1, 1, 0.5, 0.3333, 0.25, 0.2]
     box_size = [10, 10, 250]
 
