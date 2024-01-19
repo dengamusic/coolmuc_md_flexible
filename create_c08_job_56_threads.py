@@ -131,8 +131,8 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c08_5050250_0.2"
-    spacings = [0.7 + i * 0.02 for i in range(1, 25)]
+    directory = "c08_5050250_0.5"
+    spacings = [0.6 + i * 0.05 for i in range(1, 15)]
     csf = [1, 0.5, 0.3333, 0.25]
     box_size = [50, 50, 250]
 
