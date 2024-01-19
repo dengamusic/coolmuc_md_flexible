@@ -79,7 +79,7 @@ def create_bash_script(directory, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J c08_spacing_ov
+#SBATCH -J c083d
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -89,7 +89,7 @@ def create_bash_script(directory, yamls):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=02:30:00
+#SBATCH --time=06:00:00
 
 module load slurm_setup
 
@@ -128,13 +128,13 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "spacing_overlap_1010250_2"
-    spacings = [0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4]
-    csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.1667]
+    directory = "spacing_overlap_1010250_morespacing"
+    spacings = np.arange(0.6, 1.3, 0.05)
+    csf = [1.3, 1.2, 1.1, 1, 0.5, 0.3333, 0.25, 0.2]
     box_size = [10, 10, 250]
 
     create_directory(directory)
-    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 20)
+    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 10)
     print(f"Created YAML files")
     create_bash_scripts(directory, yamls)
     print("Created bash scripts.")
