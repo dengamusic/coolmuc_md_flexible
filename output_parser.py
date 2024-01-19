@@ -64,7 +64,7 @@ def parse_directory(directory):
 if len(sys.argv) == 2:
     parse_directory(sys.argv[1])
 else:
-    for dir_name in glob.glob('spacing*/'):
+    for dir_name in glob.glob('*spacing*/'):
         print(dir_name)
         parse_directory(dir_name)
         print("\n\n")
