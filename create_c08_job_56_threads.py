@@ -1,7 +1,5 @@
 import os
-import sys
 
-import numpy as np
 
 traversals = ["lc_c08_3b"]
 
