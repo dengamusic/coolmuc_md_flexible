@@ -65,7 +65,7 @@ if len(sys.argv) == 2:
     parse_directory(sys.argv[1])
 else:
     for dir_name in glob.glob('*'):
-        if dir_name == "old" or dir_name == "fail":
+        if dir_name == "old" or dir_name == "fail" or dir_name.endswith(".py"):
             continue
         print(dir_name)
         parse_directory(dir_name)
