@@ -21,9 +21,9 @@ def create_yamls_in_directory(directory, spacings, csf, box_size, iterations):
             for cell_size in csf:
                 yaml_file = os.path.join(directory, f"c08_{spacing}_{cell_size}.yaml")
                 if spacing > 0.8 and (cell_size == 1 or cell_size == 0.5 or cell_size == 0.3333):
-                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 10)
+                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 20)
                 else:
-                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 1)
+                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 10)
                 files.append(yaml_file)
 
     return files
@@ -82,7 +82,7 @@ def create_bash_script(directory, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J 3dc08
+#SBATCH -J 3d2c08
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -131,13 +131,13 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c08_2020200_3d"
-    spacings = [0.6 + i * 0.05 for i in range(1, 15)]
-    csf = [1, 0.5, 0.3333, 0.25]
+    directory = "c08_2020200_0.5to1.1_1to6"
+    spacings = [0.5 + i * 0.02 for i in range(1, 30)]
+    csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.16666]
     box_size = [20, 20, 200]
 
     create_directory(directory)
-    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 20)
+    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 0)
     print(f"Created YAML files")
     create_bash_scripts(directory, yamls)
     print("Created bash scripts.")
