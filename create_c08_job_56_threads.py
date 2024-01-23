@@ -44,7 +44,7 @@ tuning-strategies                    :  []
 tuning-interval                      :  2000
 tuning-samples                       :  3
 tuning-max-evidence                  :  10
-cutoff                               :  2.5
+cutoff                               :  1
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
 iterations                           :  {iterations}
@@ -82,7 +82,7 @@ def create_bash_script(directory, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J c0802
+#SBATCH -J 3dc08
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -131,13 +131,13 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c08_5050250_0.5"
+    directory = "c08_2020200_3d"
     spacings = [0.6 + i * 0.05 for i in range(1, 15)]
     csf = [1, 0.5, 0.3333, 0.25]
-    box_size = [50, 50, 250]
+    box_size = [20, 20, 200]
 
     create_directory(directory)
-    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 1)
+    yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 20)
     print(f"Created YAML files")
     create_bash_scripts(directory, yamls)
     print("Created bash scripts.")
