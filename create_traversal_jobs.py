@@ -35,7 +35,7 @@ tuning-strategies                    :  []
 tuning-interval                      :  2000
 tuning-samples                       :  3
 tuning-max-evidence                  :  10
-cutoff                               :  2.5
+cutoff                               :  1
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
 iterations                           :  {iterations}
