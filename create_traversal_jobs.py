@@ -66,14 +66,10 @@ no-progress-bar                      :  true
         file.write(file_string)
 
 
-def create_bash_script(directory, yamls, duration):
-    yamls_string = ""
-    for yaml in yamls:
-        yamls_string += f"AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{yaml}\n"
-
+def create_bash_script(directory, yaml_file, duration):
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J {directory}
+#SBATCH -J {yaml_file[:-5] + directory}
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -95,7 +91,7 @@ for num_threads in 1 2 4 8 12 16 20 24 28 32 36 40 44 48 52 56; do
 done
 '''
 
-    with open(f"{directory}/{directory}.sh", 'w') as file:
+    with open(f"{directory}/{yaml_file[:-5]}.sh", 'w') as file:
         file.write(script_content)
 
 

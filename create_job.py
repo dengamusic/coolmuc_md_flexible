@@ -41,7 +41,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  100
+iterations                           :  10
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
@@ -92,7 +92,7 @@ module load slurm_setup
 
 cd $HOME
 
-for num_threads in 1 2 4 8 16 32 56; do
+for num_threads in 1 2 4 8 12 16 20 24 28 32 36 40 44 48 52 56; do
     export OMP_NUM_THREADS=$num_threads
 '''
     job_string = f'''\
