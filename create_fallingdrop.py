@@ -108,7 +108,7 @@ module load slurm_setup
 cd $HOME
 
 export OMP_NUM_THREADS=56
-AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/fallingDrop.yaml
+AutoPas/build2/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/fallingDrop.yaml
 '''
 
 
