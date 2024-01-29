@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 def create_directory(directory_name):
     directory_path = os.path.join(os.getcwd(), directory_name)
 
@@ -87,8 +88,7 @@ vtk-write-frequency: 1000
         file.write(file_string)
 
 
-def create_bash_script(directory, duration, yamls):
-
+def create_bash_script(directory):
     script_content = f'''\
 #!/bin/bash
 #SBATCH -J {directory}
@@ -111,7 +111,6 @@ export OMP_NUM_THREADS=56
 AutoPas/build2/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/fallingDrop.yaml
 '''
 
-
     with open(f"{directory}/{directory}.sh", 'w') as file:
         file.write(script_content)
 
@@ -126,6 +125,6 @@ if __name__ == "__main__":
     create_directory(directory)
     yaml = create_yaml_in_directory(directory)
     print(f"Created YAML files in {directory}.")
-    create_bash_script(directory, yaml)
+    create_bash_script(directory)
     print("Created bash scripts.")
     submit_sbatch(directory)
