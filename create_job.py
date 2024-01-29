@@ -76,7 +76,7 @@ def create_bash_script(directory, duration, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J 3btest
+#SBATCH -J {directory}
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
