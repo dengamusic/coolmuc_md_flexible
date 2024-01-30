@@ -14,7 +14,7 @@ def create_directory(directory_name):
 
 def create_yaml_in_directory(directory):
     yaml_file = os.path.join(directory, f"fallingDrop.yaml")
-    create_yaml_file(yaml_file)
+    create_yaml_file(directory)
     return yaml_file
 
 
@@ -127,4 +127,4 @@ if __name__ == "__main__":
     print(f"Created YAML files in {directory}.")
     create_bash_script(directory)
     print("Created bash scripts.")
-    submit_sbatch(directory)
+    #submit_sbatch(directory)
