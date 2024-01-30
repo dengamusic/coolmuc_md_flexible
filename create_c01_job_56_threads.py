@@ -98,7 +98,7 @@ module load slurm_setup
 
 cd /dss/dsshome1/05/ge93quw2/
 
-export OMP_NUM_THREADS=1
+export OMP_NUM_THREADS=28
 {yamls_string}
 '''
 
@@ -131,9 +131,9 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c01_2020320_0.8to1.3_1to6_1thread"
+    directory = "c01_2020320_0.8to1.3_1to6_28thread"
     spacings = [0.8 + i * 0.05 for i in range(11)]
-    csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.16666]
+    csf = [1, 0.5, 0.3333, 0.25, 0.2]
     box_size = [20, 20, 320]
 
     create_directory(directory)
