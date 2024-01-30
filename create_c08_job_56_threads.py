@@ -20,10 +20,10 @@ def create_yamls_in_directory(directory, spacings, csf, box_size, iterations):
         for spacing in spacings:
             for cell_size in csf:
                 yaml_file = os.path.join(directory, f"c08_{spacing}_{cell_size}.yaml")
-                if spacing > 0.85 and (cell_size == 1 or cell_size == 0.5 or cell_size == 0.3333):
-                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 1)
+                if spacing < 0.9 and (cell_size == 1 or cell_size == 0.25 or cell_size == 0.2):
+                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 5)
                 else:
-                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 1)
+                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 10)
                 files.append(yaml_file)
 
     return files
@@ -82,7 +82,7 @@ def create_bash_script(directory, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J c080.8to1.3_1to6
+#SBATCH -J c080.7to1.3_1to6
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -92,7 +92,7 @@ def create_bash_script(directory, yamls):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=15:00:00
+#SBATCH --time=30:00:00
 
 module load slurm_setup
 
@@ -131,8 +131,8 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c08_2020320_0.8to1.3_1to6_28thread"
-    spacings = [0.8 + i * 0.05 for i in range(11)]
+    directory = "c08_2020320_0.7to1.3_1to6_28thread"
+    spacings = [0.7 + i * 0.05 for i in range(13)]
     csf = [1, 0.5, 0.3333, 0.25, 0.2]
     box_size = [20, 20, 320]
 

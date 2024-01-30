@@ -20,10 +20,10 @@ def create_yamls_in_directory(directory, spacings, csf, box_size, iterations):
         for spacing in spacings:
             for cell_size in csf:
                 yaml_file = os.path.join(directory, f"c01_{spacing}_{cell_size}.yaml")
-                if spacing > 0.85 and (cell_size == 1 or cell_size == 0.5 or cell_size == 0.3333):
+                if spacing < 0.9 and (cell_size == 1 or cell_size == 0.25 or cell_size == 0.2):
                     create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 1)
                 else:
-                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 1)
+                    create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, 5)
                 files.append(yaml_file)
 
     return files
