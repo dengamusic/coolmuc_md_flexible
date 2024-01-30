@@ -96,7 +96,7 @@ for num_threads in 1 2 4 8 12 16 20 24 28 32 36 40 44 48 52 56; do
     export OMP_NUM_THREADS=$num_threads
 '''
     job_string = f'''\
-    AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/{directory}/
+    AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/
 '''
     for yaml_file in yamls:
         script_content += job_string.strip("\n") + yaml_file + "\n"
