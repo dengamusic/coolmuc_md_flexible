@@ -44,7 +44,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  10
+iterations                           :  5
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
