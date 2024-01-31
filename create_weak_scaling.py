@@ -3,7 +3,7 @@ import sys
 
 traversals = ["lc_c01_3b", "lc_c04_3b", "lc_c08_3b", "lc_sliced_c02_3b", "lc_sliced_3b"]
 threads = [1, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
-longest_axis = [320/threads for threads in threads]
+longest_axis = [round(320/threads, 2) for threads in threads]
 longest_axis.reverse()
 print(longest_axis)
 def create_directory(directory_name):
@@ -44,7 +44,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  5
+iterations                           :  10
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
@@ -120,11 +120,11 @@ if __name__ == "__main__":
     if csf < 1:
         traversals.remove("lc_c04_3b")
     duration = sys.argv[4]
-    directory = f"wscale_s{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
+    directory = f"weakscale_s{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
 
     create_directory(directory)
     yamls = create_yamls_in_directory(directory, spacing, box_size, csf)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_script(directory, duration, yamls)
     print("Created bash scripts.")
-   # submit_sbatch(directory)
+    submit_sbatch(directory)
