@@ -4,6 +4,8 @@ import sys
 traversals = ["lc_c01_3b", "lc_c04_3b", "lc_c08_3b", "lc_sliced_c02_3b", "lc_sliced_3b"]
 threads = [1, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
 longest_axis = [320/threads for threads in threads]
+longest_axis.reverse()
+print(longest_axis)
 def create_directory(directory_name):
     directory_path = os.path.join(os.getcwd(), directory_name)
 
@@ -92,7 +94,7 @@ cd $HOME
 #
 # '''
     job_string = 'AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/'
-    for i in range(len(longest_axis)):
+    for i in range(threads.__len__()):
         script_content += f"export OMP_NUM_THREADS={threads[i]}\n"
         for traversal in traversals:
             yaml_file = os.path.join(directory, f"{traversal}_{longest_axis[i]}.yaml")
@@ -125,4 +127,4 @@ if __name__ == "__main__":
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_script(directory, duration, yamls)
     print("Created bash scripts.")
-    submit_sbatch(directory)
+   # submit_sbatch(directory)
