@@ -129,4 +129,4 @@ if __name__ == "__main__":
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_script(directory, duration, yamls)
     print("Created bash scripts.")
-    #submit_sbatch(directory)
+    submit_sbatch(directory)
