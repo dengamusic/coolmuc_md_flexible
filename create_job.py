@@ -109,7 +109,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     spacing = float(sys.argv[1])
-    box_size = [int(i) for i in sys.argv[2].split(",")]
+    box_size = [float(i) for i in sys.argv[2].split(",")]
     csf = float(sys.argv[3])
     if csf < 1:
         traversals.remove("lc_c04_3b")
