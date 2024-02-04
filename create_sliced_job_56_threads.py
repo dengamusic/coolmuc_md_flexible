@@ -1,7 +1,7 @@
 import os
 
 
-traversals = ["lc_sliced_c02_3b"]
+traversals = ["lc_sliced_3b"]
 
 
 def create_directory(directory_name):
@@ -83,7 +83,7 @@ def create_bash_script(directory, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J sc228
+#SBATCH -J sl1
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -99,11 +99,11 @@ module load slurm_setup
 
 cd /dss/dsshome1/05/ge93quw2/
 
-export OMP_NUM_THREADS=28
+export OMP_NUM_THREADS=1
 {yamls_string}
 '''
 
-    with open(f"{directory}/slicedC02.sh", 'w') as file:
+    with open(f"{directory}/sliced.sh", 'w') as file:
         file.write(script_content)
 
 
@@ -118,7 +118,7 @@ def create_bash_scripts(directory, yamls):
 def submit_sbatch(directory):
     os.chdir(directory)
     for traversal in traversals:
-        os.system(f"sbatch slicedC02.sh")
+        os.system(f"sbatch sliced.sh")
 
 
 if __name__ == "__main__":
@@ -132,7 +132,7 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "slicedC02_1313756_0.8to1.3_1to6_28thread"
+    directory = "sliced_1313756_0.8to1.3_1to6_28thread"
     spacings = [0.8 + i * 0.05 for i in range(11)]
     csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.1667]
     box_size = [13.5, 13.5, 756]
