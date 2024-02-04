@@ -134,7 +134,7 @@ if __name__ == "__main__":
     # duration_c01 = sys.argv[6]
     directory = "c04_1313378_0.8to1.3_1to0.5_28thread"
     spacings = [0.8 + i * 0.05 for i in range(11)]
-    csf = [1, 1.2, 1.4, 1.6, 1.8, 2.0]
+    csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.1667]
     box_size = [13.5, 13.5, 378]
 
     create_directory(directory)
