@@ -93,7 +93,7 @@ def create_bash_script(directory, yamls):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=10:00:00
+#SBATCH --time=01:00:00
 
 module load slurm_setup
 
@@ -134,8 +134,8 @@ if __name__ == "__main__":
     # duration_c01 = sys.argv[6]
     directory = "wc08_131313_0.8to1.3_1to6_1thread"
     spacings = [0.8 + i * 0.05 for i in range(11)]
-    csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.1667]
-    box_size = [13.5, 13.5, 13.5]
+    csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.16]
+    box_size = [13.50001, 13.50001, 13.50001]
 
     create_directory(directory)
     yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 0)
