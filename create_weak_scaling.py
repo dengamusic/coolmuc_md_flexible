@@ -43,7 +43,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  10
+iterations                           :  5
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     directory = f"weak_s{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
 
     create_directory(directory)
-    box_size = [length_1_thread - spacing, length_1_thread - spacing, 0]
+    box_size = [length_1_thread - spacing + 0.00001, length_1_thread - spacing + 0.00001, 0]
     yamls = create_yamls_in_directory(directory, spacing, box_size, csf)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_script(directory, duration, yamls)
