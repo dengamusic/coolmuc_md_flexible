@@ -83,7 +83,7 @@ def create_bash_script(directory, yamls):
 
     script_content = f'''\
 #!/bin/bash
-#SBATCH -J ws1
+#SBATCH -J wsl1
 #SBATCH --get-user-env
 #SBATCH --clusters=cm2_tiny
 #SBATCH --partition=cm2_tiny
@@ -132,10 +132,10 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "wsliced_1313377_0.8to1.3_1to0.5_1thread"
+    directory = "wsli_1313377_0.8to1.3_1to0.5_1thread"
     spacings = [0.8 + i * 0.05 for i in range(11)]
     csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.16]
-    box_size = [13.50001, 13.50001, 378]
+    box_size = [13.50001, 13.50001, 13.50001]
 
     create_directory(directory)
     yamls = create_yamls_in_directory(directory, spacings, csf, box_size, 0)
