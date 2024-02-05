@@ -42,6 +42,7 @@ tuning-interval                      :  2000
 tuning-samples                       :  3
 tuning-max-evidence                  :  10
 functor                          :  Lennard-Jones AVX
+traversal                           : [lc_c08]
 newton3                          :  [enabled]
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c08_two_body_1313756"
+    directory = "c08_two_body2_1313756"
     spacings = [0.8 + i * 0.05 for i in range(11)]
     csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.16]
     box_size = [13.50001, 13.50001, 756]
