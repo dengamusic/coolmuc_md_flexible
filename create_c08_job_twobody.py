@@ -22,9 +22,9 @@ def create_yamls_in_directory(directory, spacings, csf, box_size, iterations):
                 yaml_file = os.path.join(directory, f"c08_{spacing}_{cell_size}.yaml")
                 domain = [box_size[0] - spacing, box_size[1] - spacing, box_size[2] - spacing]
                 if cell_size <= 0.25:
-                    create_yaml_file(yaml_file, traversal, spacing, domain, cell_size, 1)
+                    create_yaml_file(yaml_file, traversal, spacing, domain, cell_size, 10)
                 else:
-                    create_yaml_file(yaml_file, traversal, spacing, domain, cell_size, 1)
+                    create_yaml_file(yaml_file, traversal, spacing, domain, cell_size, 10)
                 files.append(yaml_file)
 
     return files
@@ -92,7 +92,7 @@ def create_bash_script(directory, yamls):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=00:20:00
+#SBATCH --time=00:50:00
 
 module load slurm_setup
 
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     # iterations = int(sys.argv[4])
     # duration = sys.argv[5]
     # duration_c01 = sys.argv[6]
-    directory = "c08_two_body2_1313756"
+    directory = "c08_two_body_1313756"
     spacings = [0.8 + i * 0.05 for i in range(11)]
     csf = [1, 0.5, 0.3333, 0.25, 0.2, 0.16]
     box_size = [13.50001, 13.50001, 756]
