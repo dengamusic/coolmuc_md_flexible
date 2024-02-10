@@ -2,7 +2,7 @@ import os
 import sys
 
 traversals = ["lc_c01_3b", "lc_c04_3b", "lc_c08_3b", "lc_sliced_c02_3b", "lc_sliced_3b"]
-threads = [1, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
+threads = [1, 2, 3, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
 length_1_thread = 13.5
 def create_directory(directory_name):
     directory_path = os.path.join(os.getcwd(), directory_name)
@@ -16,7 +16,7 @@ def create_directory(directory_name):
 
 def create_yamls_in_directory(directory, spacing, box_size, cell_size):
     yamls = []
-    longest_axis = [length_1_thread * t - spacing for t in threads]
+    longest_axis = [length_1_thread * t - spacing + 0.0001 for t in threads]
     for axis in longest_axis:
         for traversal in traversals:
             yaml_file = os.path.join(directory, f"{traversal}_{axis}.yaml")
@@ -43,7 +43,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  5
+iterations                           :  8
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
