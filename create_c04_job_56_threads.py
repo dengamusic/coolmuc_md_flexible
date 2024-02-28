@@ -130,7 +130,7 @@ if __name__ == "__main__":
     # duration_c01 = sys.argv[6]
     directory = "c04_2020250_0.5"
     spacings = [0.6 + i * 0.05 for i in range(1, 15)]
-    csf = [1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.5]
+    csf = [1]
     box_size = [20, 20, 250]
 
     create_directory(directory)

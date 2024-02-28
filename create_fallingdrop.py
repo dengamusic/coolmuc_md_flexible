@@ -101,7 +101,7 @@ def create_bash_script(directory):
 #SBATCH --mail-type=end
 #SBATCH --mail-user=nanxingnick.deng@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=70:00:00
+#SBATCH --time=10:00:00
 
 module load slurm_setup
 

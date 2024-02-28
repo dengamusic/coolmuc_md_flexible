@@ -2,8 +2,8 @@ import os
 import sys
 
 traversals = ["lc_c01_3b", "lc_c04_3b", "lc_c08_3b", "lc_sliced_c02_3b", "lc_sliced_3b"]
-
-
+threads = [1, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
+length_1_thread = 13.5
 def create_directory(directory_name):
     directory_path = os.path.join(os.getcwd(), directory_name)
 
@@ -16,14 +16,16 @@ def create_directory(directory_name):
 
 def create_yamls_in_directory(directory, spacing, box_size, cell_size):
     yamls = []
-    for traversal in traversals:
-        yaml_file = os.path.join(directory, f"{traversal}.yaml")
-        create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size)
-        yamls.append(yaml_file)
+    longest_axis = [length_1_thread * t - spacing for t in threads]
+    for axis in longest_axis:
+        for traversal in traversals:
+            yaml_file = os.path.join(directory, f"{traversal}_{axis}.yaml")
+            create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, axis)
+            yamls.append(yaml_file)
     return yamls
 
 
-def create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, iterations=3):
+def create_yaml_file(yaml_file, traversal, spacing, box_size, cell_size, axis):
     newton3 = "dis" if "c01" in traversal else "en"
     file_string = f'''\
 container                            :  [LinkedCells] 
@@ -41,7 +43,7 @@ tuning-max-evidence                  :  10
 cutoff                               :  2.5
 cell-size                            :  [{cell_size}]
 deltaT                               :  0
-iterations                           :  {iterations}
+iterations                           :  10
 boundary-type                        :  [periodic, periodic, periodic]
 fastParticlesThrow                   :  false
 Sites:
@@ -53,7 +55,7 @@ Sites:
 Objects:
   CubeClosestPacked:
     0:
-      box-length                     :  [{box_size[0]}, {box_size[1]}, {box_size[2]}]
+      box-length                     :  [{box_size[0]}, {box_size[1]}, {axis}]
       bottomLeftCorner               :  [0, 0, 0]
       particle-spacing               :  {spacing}
       velocity                       :  [0, 0, 0]
@@ -83,16 +85,20 @@ def create_bash_script(directory, duration, yamls):
 module load slurm_setup
 
 cd $HOME
-
-for num_threads in 1 2 4 8 12 16 20 24 28 32 36 40 44 48 52 56; do
-    export OMP_NUM_THREADS=$num_threads
 '''
-    job_string = f'''\
-    AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/
-'''
-    for yaml_file in yamls:
-        script_content += job_string.strip("\n") + yaml_file + "\n"
-    script_content += "done"
+#     for num_threads in 1 4 8 12 16 20 24 28 32 36 40 44 48 52 56; do
+#     export
+#     OMP_NUM_THREADS =$num_threads
+#
+#
+# '''
+    longest_axis = [length_1_thread * t - spacing for t in threads]
+    job_string = 'AutoPas/build/examples/md-flexible/md-flexible --yaml-file coolmuc_md_flexible/'
+    for i in range(threads.__len__()):
+        script_content += f"export OMP_NUM_THREADS={threads[i]}\n"
+        for traversal in traversals:
+            yaml_file = os.path.join(directory, f"{traversal}_{longest_axis[i]}.yaml")
+            script_content += job_string + yaml_file + "\n"
 
     with open(f"{directory}/{directory}.sh", 'w') as file:
         file.write(script_content)
@@ -109,14 +115,16 @@ if __name__ == "__main__":
         sys.exit(1)
 
     spacing = float(sys.argv[1])
-    box_size = [float(i) for i in sys.argv[2].split(",")]
+    # box_size = [int(i) for i in sys.argv[2].split(",")]
+    box_size = [length_1_thread, length_1_thread, 56 * length_1_thread]
     csf = float(sys.argv[3])
     if csf < 1:
         traversals.remove("lc_c04_3b")
     duration = sys.argv[4]
-    directory = f"spacing{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
+    directory = f"weak_s{spacing}_box{box_size[0]}{box_size[1]}{box_size[2]}_CSF{csf}"
 
     create_directory(directory)
+    box_size = [length_1_thread - spacing, length_1_thread - spacing, 0]
     yamls = create_yamls_in_directory(directory, spacing, box_size, csf)
     print(f"Created YAML files in directory '{directory}' with spacing={spacing}, box_size={box_size}, cell_size={csf}")
     create_bash_script(directory, duration, yamls)
